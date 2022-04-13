@@ -1,7 +1,11 @@
+import { IUser } from "../../../types/IUser"
 import { AuthAction, AuthActionsEnum, AuthState } from "./types"
 
 const initialState :AuthState = {
-    isAuth: false
+    isAuth: false,
+    error: '',
+    isLoading: false,
+    user: {} as IUser
 }
 
 export const authReducer = (state = initialState, action: AuthAction) : AuthState =>{

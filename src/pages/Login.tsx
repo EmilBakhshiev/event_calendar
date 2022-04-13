@@ -1,7 +1,13 @@
-import React from 'react'
+import { Layout, Row } from 'antd';
+import React from 'react';
+import AuthForm from '../components/AuthForm';
 
 export const Login: React.FC = () => {
   return (
-    <div>LOGIN PAGE</div>
-  )
-}
+    <Layout>
+      <Row justify='center' align='middle' className='auth-section'>
+        <AuthForm />
+      </Row>
+    </Layout>
+  );
+};
