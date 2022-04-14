@@ -1,8 +1,8 @@
 import { Form, Input, Button, Checkbox } from 'antd';
 import { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useAction } from '../hooks/useAction';
 import { useTypeSelector } from '../hooks/useTypeSelector';
-import { AuthActionCreators } from '../store/reducers/auth/action-creators';
 import { REQUIRED_INPUT_RULE } from '../utils/constant';
 import { rules } from '../utils/rules';
 
@@ -10,10 +10,11 @@ const AuthForm: FC = () => {
   const dispatch = useDispatch();
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
+  const { login } = useAction();
 
   const { error, isLoading } = useTypeSelector((state) => state.authReducer);
   const handleSubmit = () => {
-    dispatch(AuthActionCreators.login(userName, password));
+    login(userName, password);
   };
   return (
     <Form onFinish={handleSubmit}>
@@ -31,7 +32,10 @@ const AuthForm: FC = () => {
         name='password'
         rules={[rules.required(REQUIRED_INPUT_RULE)]}
       >
-        <Input.Password value={password} onChange={(e) => setPassword(e.target.value)} />
+        <Input.Password
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
