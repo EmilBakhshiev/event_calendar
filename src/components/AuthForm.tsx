@@ -1,41 +1,46 @@
 import { Form, Input, Button, Checkbox } from 'antd';
-import { FC } from 'react';
+import { FC, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useTypeSelector } from '../hooks/useTypeSelector';
+import { AuthActionCreators } from '../store/reducers/auth/action-creators';
 import { REQUIRED_INPUT_RULE } from '../utils/constant';
 import { rules } from '../utils/rules';
 
 const AuthForm: FC = () => {
-    const handleSubmit = () =>{
-console.log('submit');
+  const dispatch = useDispatch();
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
 
-    }
+  const { error, isLoading } = useTypeSelector((state) => state.authReducer);
+  const handleSubmit = () => {
+    dispatch(AuthActionCreators.login(userName, password));
+  };
   return (
-    <Form
-    onFinish={handleSubmit}
-    >
+    <Form onFinish={handleSubmit}>
+      {error && <div style={{ color: 'red' }}>{error}</div>}
       <Form.Item
-        label="Имя пользователя"
-        name="username"
+        label='Имя пользователя'
+        name='username'
         rules={[rules.required(REQUIRED_INPUT_RULE)]}
       >
-        <Input />
+        <Input value={userName} onChange={(e) => setUserName(e.target.value)} />
       </Form.Item>
 
       <Form.Item
-        label="Password"
-        name="password"
+        label='Пароль'
+        name='password'
         rules={[rules.required(REQUIRED_INPUT_RULE)]}
       >
-        <Input.Password />
+        <Input.Password value={password} onChange={(e) => setPassword(e.target.value)} />
       </Form.Item>
-
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type="primary" htmlType="submit">
+        <Button type='primary' htmlType='submit' loading={isLoading}>
           Submit
         </Button>
       </Form.Item>
     </Form>
-  )
-}
+  );
+};
 
-export default AuthForm
+export default AuthForm;

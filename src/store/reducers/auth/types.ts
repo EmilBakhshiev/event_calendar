@@ -19,7 +19,7 @@ export interface SetAuthAction {
   payload: boolean;
 }
 
-export interface setUserAction {
+export interface SetUserAction {
   type: AuthActionsEnum.SET_USER;
   payload: IUser;
 }
@@ -36,6 +36,6 @@ export interface SetErrorAction {
 
 export type AuthAction =
   | SetAuthAction
-  | setUserAction
+  | SetUserAction
   | SetIsLoading
   | SetErrorAction;
