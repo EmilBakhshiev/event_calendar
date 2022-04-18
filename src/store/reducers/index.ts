@@ -1,5 +1,7 @@
-import {authReducer} from './auth/index'
+import { authReducer } from './auth/index';
+import { evenrReducer } from './event';
 
 export default {
-    authReducer
-}
+  authReducer,
+  evenrReducer,
+};

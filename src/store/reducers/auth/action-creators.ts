@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { AppDispatch } from '../..';
+import UserService from '../../../api/UserService';
 import { IUser } from '../../../types/IUser';
 import {
   AuthActionsEnum,
@@ -31,7 +32,7 @@ export const AuthActionCreators = {
       try {
         dispatch(AuthActionCreators.setIsLoading(true));
         setTimeout(async () => {
-          const response = await axios.get<IUser[]>('./users.json');
+          const response = await UserService.getUsers();
           const mockUsers = response.data.find(
             (user) => user.username === username && user.password === password
           );
@@ -39,8 +40,8 @@ export const AuthActionCreators = {
           if (mockUsers) {
             localStorage.setItem('auth', 'true');
             localStorage.setItem('username', mockUsers.username);
-            dispatch(AuthActionCreators.setIsAuth(true));
             dispatch(AuthActionCreators.setUser(mockUsers));
+            dispatch(AuthActionCreators.setIsAuth(true));
           } else {
             dispatch(
               AuthActionCreators.setError('Incorrect password or username')
