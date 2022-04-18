@@ -1,3 +1,12 @@
 .auth-section{
   height: calc(100vh - 64px);
 }
+
+.events{
+  padding: 0;
+  list-style: none;
+}
+
+.login-btn{
+  width: 100%;
+}

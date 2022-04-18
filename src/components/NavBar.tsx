@@ -16,15 +16,15 @@ const NavBar: FC = () => {
       <Row justify='end'>
         {isAuth ? (
           <>
-            <div style={{ color: 'white' }}>{user.username}</div>
+            <div style={{ color: 'white', marginRight: '10px' }}>{user.username}</div>
             <Menu theme='dark' mode='horizontal' selectable={false}>
-              <Menu.Item onClick={() => logout()}>Выйти</Menu.Item>
+              <Menu.Item onClick={() => logout()}>Logout</Menu.Item>
             </Menu>
           </>
         ) : (
           <Menu theme='dark' mode='horizontal' selectable={false}>
             <Menu.Item onClick={() => navigate(RoutesNames.LOGIN)}>
-              Логин
+              Login
             </Menu.Item>
           </Menu>
         )}

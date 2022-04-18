@@ -1,4 +1,4 @@
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button } from 'antd';
 import { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAction } from '../hooks/useAction';
@@ -7,7 +7,6 @@ import { REQUIRED_INPUT_RULE } from '../utils/constant';
 import { rules } from '../utils/rules';
 
 const AuthForm: FC = () => {
-  const dispatch = useDispatch();
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useAction();
@@ -20,7 +19,7 @@ const AuthForm: FC = () => {
     <Form onFinish={handleSubmit}>
       {error && <div style={{ color: 'red' }}>{error}</div>}
       <Form.Item
-        label='Имя пользователя'
+        label='Username'
         name='username'
         rules={[rules.required(REQUIRED_INPUT_RULE)]}
       >
@@ -28,7 +27,7 @@ const AuthForm: FC = () => {
       </Form.Item>
 
       <Form.Item
-        label='Пароль'
+        label='Password'
         name='password'
         rules={[rules.required(REQUIRED_INPUT_RULE)]}
       >
@@ -38,8 +37,8 @@ const AuthForm: FC = () => {
         />
       </Form.Item>
 
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-        <Button type='primary' htmlType='submit' loading={isLoading}>
+      <Form.Item>
+        <Button className='login-btn' type='primary' htmlType='submit' loading={isLoading}>
           Submit
         </Button>
       </Form.Item>
